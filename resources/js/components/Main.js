@@ -13,7 +13,7 @@ class Main extends Component {
     //Initialize the state in the constructor
     this.state = {
         videos: [],
-        currentProduct: null,
+        currentVideo: null,
         block1: "block",
         block2: "none",
     }
@@ -40,17 +40,17 @@ class Main extends Component {
   	this.setState({block1: "block", block2: "none"})
   }
 
-  handleAddProduct(product) {
+  handleAddProduct(video) {
      
-   // product.price = Number(product.price);
-   // let body = JSON.stringify(product)
+   // video.price = Number(video.price);
+   // let body = JSON.stringify(video)
 
-   axios.post('api/videos/', product)
+   axios.post('api/videos/', video)
       .then(response => {
       	console.log(response.data, 'response response')
     this.setState({
            videos: this.videos.concat(response.data),
-           currentProduct : response.data
+           currentVideo : response.data
        })
     })
   .catch(error => {
@@ -74,20 +74,20 @@ class Main extends Component {
         );
     })
   }
-  handleClick(product) {
-    this.setState({currentProduct:product});
+  handleClick(video) {
+    this.setState({currentVideo:video});
   }
     render() {
          /* Some css code has been removed for brevity */
-         let tab = this.state.videos.map(product => {
+         let tab = this.state.videos.map(video => {
         return (
             /* When using list you need to specify a key
              * attribute that is unique for each list item
             */
             
             <li onClick={
-                () =>this.handleClick(product)} key={product.id} >
-                { product.title } 
+                () =>this.handleClick(video)} key={video.id} >
+                { video.title } 
             </li>    
         );
     })
@@ -101,7 +101,7 @@ class Main extends Component {
             <a href="javascript:;" onClick={this.handleShow}>Add Video</a>
             </div>
            	<div className="col-md-7 col-xs-12">
-            <Video video={this.state.currentProduct} />
+            <Video video={this.state.currentVideo} />
             </div>
             <div className="col-md-3 col-xs-12">
              <h3 style={{backgroundColor: "lightblue"}}> All videos </h3>
@@ -123,7 +123,7 @@ class Main extends Component {
             <AddVideo onAdd={this.handleAddProduct} />
             </div>
             <div className="col col-md-3">
-            	<a href="javascript:;" onClick={this.handleShow2}>List of product</a>
+            	<a href="javascript:;" onClick={this.handleShow2}>List of video</a>
             </div>
             </div>
            </div>

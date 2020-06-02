@@ -69360,7 +69360,7 @@ var Main = /*#__PURE__*/function (_Component) {
 
     _this.state = {
       videos: [],
-      currentProduct: null,
+      currentVideo: null,
       block1: "block",
       block2: "none"
     };
@@ -69403,17 +69403,17 @@ var Main = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "handleAddProduct",
-    value: function handleAddProduct(product) {
+    value: function handleAddProduct(video) {
       var _this3 = this;
 
-      // product.price = Number(product.price);
-      // let body = JSON.stringify(product)
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/videos/', product).then(function (response) {
+      // video.price = Number(video.price);
+      // let body = JSON.stringify(video)
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/videos/', video).then(function (response) {
         console.log(response.data, 'response response');
 
         _this3.setState({
           videos: _this3.videos.concat(response.data),
-          currentProduct: response.data
+          currentVideo: response.data
         });
       })["catch"](function (error) {
         console.log(error);
@@ -69445,9 +69445,9 @@ var Main = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "handleClick",
-    value: function handleClick(product) {
+    value: function handleClick(video) {
       this.setState({
-        currentProduct: product
+        currentVideo: video
       });
     }
   }, {
@@ -69456,7 +69456,7 @@ var Main = /*#__PURE__*/function (_Component) {
       var _this5 = this;
 
       /* Some css code has been removed for brevity */
-      var tab = this.state.videos.map(function (product) {
+      var tab = this.state.videos.map(function (video) {
         return (
           /*#__PURE__*/
 
@@ -69465,10 +69465,10 @@ var Main = /*#__PURE__*/function (_Component) {
           */
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             onClick: function onClick() {
-              return _this5.handleClick(product);
+              return _this5.handleClick(video);
             },
-            key: product.id
-          }, product.title)
+            key: video.id
+          }, video.title)
         );
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -69486,7 +69486,7 @@ var Main = /*#__PURE__*/function (_Component) {
       }, "Add Video")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-7 col-xs-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Video__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        video: this.state.currentProduct
+        video: this.state.currentVideo
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-3 col-xs-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -69513,7 +69513,7 @@ var Main = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "javascript:;",
         onClick: this.handleShow2
-      }, "List of product")))));
+      }, "List of video")))));
     }
   }]);
 
