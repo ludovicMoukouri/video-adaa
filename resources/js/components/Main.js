@@ -95,18 +95,19 @@ class Main extends Component {
     <>
         <div className="container-fluid" style={{display: this.state.block1}}>
         	<div className="row">
-        		<div className="col col-md-3">
+        		 
+
+            <div className="col-md-2 col-xs-12">
+            <a href="javascript:;" onClick={this.handleShow}>Add Video</a>
+            </div>
+           	<div className="col-md-7 col-xs-12">
+            <Video video={this.state.currentProduct} />
+            </div>
+            <div className="col-md-3 col-xs-12">
              <h3 style={{backgroundColor: "lightblue"}}> All videos </h3>
               <ul className="list-group">
                 { this.renderProducts() }
               </ul> 
-            </div> 
-
-           	<div className="col col-md-7">
-            <Video video={this.state.currentProduct} />
-            </div>
-            <div className="col col-md-2">
-            <a href="javascript:;" onClick={this.handleShow}>Add Video</a>
             </div>
             </div>
 
