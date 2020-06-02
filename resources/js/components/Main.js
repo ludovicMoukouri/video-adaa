@@ -116,13 +116,13 @@ class Main extends Component {
         <div className="container-fluid" style={{display: this.state.block2}}>
 
         <div className="row">
-        		<div className="col col-md-3"> 
+        		<div className="col-md-3 col-xs-12"> 
             </div> 
 
-           	<div className="col col-md-6">
+           	<div className="col-md-6 col-xs-12">
             <AddVideo onAdd={this.handleAddProduct} />
             </div>
-            <div className="col col-md-3">
+            <div className="col-md-3 col-xs-12">
             	<a href="javascript:;" onClick={this.handleShow2}>List of video</a>
             </div>
             </div>
