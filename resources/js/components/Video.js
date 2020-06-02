@@ -4,10 +4,9 @@ import ReactPlayer from 'react-player'
  
 /* An example React component */
 class Video  extends Component {
- 
+  
     render() {
       let video = this.props.video
-         console.log(video)
          /* Some css code has been removed for brevity */
           const divStyle = {
       /*code omitted for brevity */
@@ -20,6 +19,8 @@ class Video  extends Component {
         <ReactPlayer
           style={{ position: "absolute", top: "0", left: "0"}}
           url={video.liens}
+          controls
+          playing
           width='100%'
           height='100%'
         />

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Video from './Video';
 import AddVideo from './AddVideo';
 import styles from './css/mystyle.module.css';
+import ReactPlayer from 'react-player'
  
 /* An example React component */
 class Main extends Component {
@@ -19,13 +20,13 @@ class Main extends Component {
     }
     this.handleShow = this.handleShow.bind(this);
     this.handleShow2 = this.handleShow2.bind(this);
+    this.handleAddProduct = this.handleAddProduct.bind(this);
   }
 	componentDidMount() {
 		axios.get('/api/videos')
   .then(response => {
-    console.log(response.data);
     const videos = response.data
-    this.setState({ videos });
+    this.setState({ videos: videos });
   })
   .catch(error => {
     console.log(error);
@@ -47,11 +48,13 @@ class Main extends Component {
 
    axios.post('api/videos/', video)
       .then(response => {
-      	console.log(response.data, 'response response')
-    this.setState({
-           videos: this.videos.concat(response.data),
-           currentVideo : response.data
-       })
+      	const video1 = response.data
+     this.setState((prevState)=> ({
+           videos: prevState.videos.concat(response.data),
+           currentVideo : response.data,
+           block1: "block",
+           block2: "none"
+       }))
     })
   .catch(error => {
     console.log(error);
@@ -60,7 +63,7 @@ class Main extends Component {
  }
 
 	
-  renderProducts() {
+  renderVideo() {
     return this.state.videos.map(video => {
         return (
             /* When using list you need to specify a key
@@ -79,16 +82,23 @@ class Main extends Component {
   }
     render() {
          /* Some css code has been removed for brevity */
-         let tab = this.state.videos.map(video => {
+         let video_list = this.state.videos.map(video => {
         return (
             /* When using list you need to specify a key
              * attribute that is unique for each list item
             */
             
-            <li onClick={
+            <li class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center" onClick={
                 () =>this.handleClick(video)} key={video.id} >
-                { video.title } 
-            </li>    
+               <ReactPlayer
+          style={{ position: "absolute", top: "0", left: "0"}}
+          url={video.liens}
+          width='15%'
+          height='100%'
+        /><span class="textItem">  { video.titre } </span> 
+                <span class="badge badge-primary badge-pill"> 
+                </span>
+            </li>   
         );
     })
     return (
@@ -104,9 +114,9 @@ class Main extends Component {
             <Video video={this.state.currentVideo} />
             </div>
             <div className="col-md-3 col-xs-12">
-             <h3 style={{backgroundColor: "lightblue"}}> All videos </h3>
-              <ul className="list-group">
-                { this.renderProducts() }
+             <h3 className="bigblue"> All videos </h3>
+              <ul className="list-group" id="received">
+                { video_list }
               </ul> 
             </div>
             </div>

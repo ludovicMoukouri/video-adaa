@@ -1,7 +1,13 @@
 .bigblue{
-	background-color: "lightblue";
+	background-color: lightblue;
 }
 
-.block1 {
-	display: block;
+.textItem {
+	margin: 0 0 0 16%;
 }
+
+#received {
+		width: 100%!important;
+		height: 540px;
+		overflow: scroll;
+	}

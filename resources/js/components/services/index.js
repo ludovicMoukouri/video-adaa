@@ -2,9 +2,9 @@ import axios from 'axios';
 // const url = 'http://localhost:3000/api/';
 const url = '/api/';
 export default {
-  login(credentials) {
+  videos(videos) {
     return axios
-      .post(url + 'login/', credentials)
+      .post(url + 'login/', videos)
       .then(response => response.data);
   },
   products(){

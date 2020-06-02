@@ -6456,7 +6456,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".bigblue{\r\n\tbackground-color: \"lightblue\";\r\n}\r\n\r\n.block1 {\r\n\tdisplay: block;\r\n}", ""]);
+exports.push([module.i, ".bigblue{\r\n\tbackground-color: lightblue;\r\n}\r\n\r\n.textItem {\r\n\tmargin: 0 0 0 16%;\r\n}\r\n\r\n#received {\r\n\t\twidth: 100%!important;\r\n\t\theight: 540px;\r\n\t\toverflow: scroll;\r\n\t}", ""]);
 
 // exports
 
@@ -69315,6 +69315,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AddVideo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AddVideo */ "./resources/js/components/AddVideo.js");
 /* harmony import */ var _css_mystyle_module_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./css/mystyle.module.css */ "./resources/js/components/css/mystyle.module.css");
 /* harmony import */ var _css_mystyle_module_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_css_mystyle_module_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_player__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-player */ "./node_modules/react-player/lib/ReactPlayer.js");
+/* harmony import */ var react_player__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_player__WEBPACK_IMPORTED_MODULE_7__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69336,6 +69338,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -69366,6 +69369,7 @@ var Main = /*#__PURE__*/function (_Component) {
     };
     _this.handleShow = _this.handleShow.bind(_assertThisInitialized(_this));
     _this.handleShow2 = _this.handleShow2.bind(_assertThisInitialized(_this));
+    _this.handleAddProduct = _this.handleAddProduct.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -69375,7 +69379,6 @@ var Main = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/videos').then(function (response) {
-        console.log(response.data);
         var videos = response.data;
 
         _this2.setState({
@@ -69409,19 +69412,23 @@ var Main = /*#__PURE__*/function (_Component) {
       // video.price = Number(video.price);
       // let body = JSON.stringify(video)
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/videos/', video).then(function (response) {
-        console.log(response.data, 'response response');
+        var video1 = response.data;
 
-        _this3.setState({
-          videos: _this3.videos.concat(response.data),
-          currentVideo: response.data
+        _this3.setState(function (prevState) {
+          return {
+            videos: prevState.videos.concat(response.data),
+            currentVideo: response.data,
+            block1: "block",
+            block2: "none"
+          };
         });
       })["catch"](function (error) {
         console.log(error);
       });
     }
   }, {
-    key: "renderProducts",
-    value: function renderProducts() {
+    key: "renderVideo",
+    value: function renderVideo() {
       var _this4 = this;
 
       return this.state.videos.map(function (video) {
@@ -69456,7 +69463,7 @@ var Main = /*#__PURE__*/function (_Component) {
       var _this5 = this;
 
       /* Some css code has been removed for brevity */
-      var tab = this.state.videos.map(function (video) {
+      var video_list = this.state.videos.map(function (video) {
         return (
           /*#__PURE__*/
 
@@ -69464,11 +69471,25 @@ var Main = /*#__PURE__*/function (_Component) {
            * attribute that is unique for each list item
           */
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            "class": "list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center",
             onClick: function onClick() {
               return _this5.handleClick(video);
             },
             key: video.id
-          }, video.title)
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_player__WEBPACK_IMPORTED_MODULE_7___default.a, {
+            style: {
+              position: "absolute",
+              top: "0",
+              left: "0"
+            },
+            url: video.liens,
+            width: "15%",
+            height: "100%"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            "class": "textItem"
+          }, "  ", video.titre, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            "class": "badge badge-primary badge-pill"
+          }))
         );
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -69490,12 +69511,11 @@ var Main = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-3 col-xs-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        style: {
-          backgroundColor: "lightblue"
-        }
+        className: "bigblue"
       }, " All videos "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "list-group"
-      }, this.renderProducts())))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "list-group",
+        id: "received"
+      }, video_list)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid",
         style: {
           display: this.state.block2
@@ -69587,7 +69607,6 @@ var Video = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var video = this.props.video;
-      console.log(video);
       /* Some css code has been removed for brevity */
 
       var divStyle = {
@@ -69612,6 +69631,8 @@ var Video = /*#__PURE__*/function (_Component) {
           left: "0"
         },
         url: video.liens,
+        controls: true,
+        playing: true,
         width: "100%",
         height: "100%"
       }));
@@ -69670,8 +69691,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var url = '/api/';
 /* harmony default export */ __webpack_exports__["default"] = ({
-  login: function login(credentials) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url + 'login/', credentials).then(function (response) {
+  videos: function videos(_videos) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url + 'login/', _videos).then(function (response) {
       return response.data;
     });
   },
